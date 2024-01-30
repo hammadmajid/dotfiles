@@ -1,0 +1,21 @@
+theme = "catppuccin_mocha"
+
+[editor]
+auto-save = true
+true-color = true
+color-modes = true
+line-number = "relative"
+cursorline = true
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "block"
+
+[editor.file-picker]
+hidden = false
