@@ -36,8 +36,10 @@ alias gg="lazygit"
 alias ls="exa --icons --all"
 alias bat="batcat"
 
-# startup scripts
-
+# Startup scripts
+source /home/hammad/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /home/hammad/.local/share/fsh/fast-syntax-highlighting.plugin.zsh
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
 
