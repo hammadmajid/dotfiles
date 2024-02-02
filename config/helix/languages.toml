@@ -47,3 +47,7 @@ args = ["--ignore", "E501"]
 [language.formatter]
 command = "black"
 args = ["--line-length", "88", "--quiet", "-"]
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
