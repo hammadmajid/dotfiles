@@ -1,0 +1,16 @@
+{
+  "prefs": {
+    "HasAutoOpenedWelcomeFolder": "true",
+    "Shortcuts": "true",
+    "ExperimentId": "959590ea-14a0-4516-8099-1ff29eddb485",
+    "WelcomeTipsFeaturesUsed": "[{\"Action\":\"ThemePicker\"},{\"Hint\":\"CreateBlock\"}]",
+    "ReceivedReferralTheme": "\"Inactive\"",
+    "ChangelogVersions": "{\"v0.2024.03.26.08.02.stable_02\":true}",
+    "AliasExpansionBannerSeen": "true",
+    "AutosuggestionAcceptedCount": "2",
+    "NotebookFontSize": "14.0",
+    "AIAssistantRequestLimitInfo": "{\"limit\":100,\"num_requests_used_since_refresh\":0,\"next_refresh_time\":\"2024-04-04T15:53:33.588667494Z\"}",
+    "VimKeybindingsBannerState": "\"Dismissed\"",
+    "FontSize": "13.0"
+  }
+}
