@@ -1,0 +1,9 @@
+[language-server.astro-ls]
+command = "astro-ls"
+args = ["--stdio"]
+config = {typescript = {tsdk = "/usr/lib/"}, environment = "node"}
+
+[[language]]
+name = "astro"
+auto-format = true
+language-servers = [ "astro-ls", "tailwindcss-ls" ]
