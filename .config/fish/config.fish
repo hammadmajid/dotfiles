@@ -26,7 +26,7 @@ alias copy="xclip -selection clipboard"
 alias yy=yazi
 #
 # Package: zed
-alias zz=zed
+alias zz="zed ."
 
 # exit
 alias :q=exit
