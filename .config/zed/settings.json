@@ -7,30 +7,33 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "languages": {
-    "C++": {
-      "show_edit_predictions": false
-    }
-  },
-  "assistant": {
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
-    },
-    "version": "2"
-  },
-  "features": {
-    "edit_prediction_provider": "zed"
-  },
-  "vim_mode": false,
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "JetBrains New Dark"
-  },
-  "vim": {
-    "toggle_relative_line_numbers": true
-  }
+	"show_edit_predictions": false,
+	"languages": {
+		"C++": {
+			"show_edit_predictions": false
+		}
+	},
+	"assistant": {
+		"default_model": {
+			"provider": "zed.dev",
+			"model": "claude-3-5-sonnet-latest"
+		},
+		"version": "2"
+	},
+	"features": {
+		"edit_prediction_provider": "zed"
+	},
+	"vim_mode": false,
+	"ui_font_size": 16,
+	"buffer_font_size": 16,
+	"theme": {
+		"mode": "system",
+		"light": "One Light",
+		"dark": "JetBrains New Dark"
+	},
+	"vim": {
+		"toggle_relative_line_numbers": true
+	},
+	"format_on_save": "off",
+	"formatter": "language_server"
 }
