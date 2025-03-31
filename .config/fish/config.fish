@@ -27,6 +27,9 @@ alias yy=yazi
 #
 # Package: zed
 alias zz="zed ."
+#
+# Package: zellij
+alias zj=zellij
 
 # exit
 alias :q=exit
@@ -57,10 +60,6 @@ mise activate fish | source
 #
 # Package: atuin
 atuin init fish | source
-# Package: Zellij
-if status is-interactive
-    eval (zellij setup --generate-auto-start fish | string collect)
-end
 
 # pnpm
 set -gx PNPM_HOME "/home/bine/.local/share/pnpm"
