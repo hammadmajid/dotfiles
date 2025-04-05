@@ -2,6 +2,7 @@
 bun = "latest"
 deno = "latest"
 go = "latest"
+java = "zulu-8"
 node = "latest"
 pnpm = "latest"
 rust = "latest"
