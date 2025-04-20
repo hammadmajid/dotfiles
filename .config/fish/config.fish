@@ -9,8 +9,8 @@ set -Ux EDITOR hx # package: helix
 # ----------------------------------
 #
 # If you want to use the default ls run `\ls`
-# Package: exa
-alias ls="exa --icons --group-directories-first --all"
+# Package: eza
+alias ls="eza --icons --group-directories-first --all"
 #
 # Package: lazygit
 alias gg="lazygit"
