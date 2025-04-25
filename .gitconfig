@@ -2,6 +2,7 @@
 	defaultBranch = trunk
 [core]
     editor = hx
+	autocrlf = input
 [user]
 	email = hammadmajid@proton.me
 	name = Hammad Majid
