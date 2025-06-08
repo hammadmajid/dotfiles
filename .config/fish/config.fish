@@ -41,9 +41,6 @@ alias shx="sudo hx"
 #
 # history grep alias
 alias hg="history | rg"
-#
-# GitHub Copilot
-alias ai="gh copilot suggest -t"
 
 # Shell integration
 # ------------------
