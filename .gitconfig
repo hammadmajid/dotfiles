@@ -1,5 +1,5 @@
 [init]
-	defaultBranch = trunk
+	defaultBranch = main
 [core]
     editor = hx
 	autocrlf = input
