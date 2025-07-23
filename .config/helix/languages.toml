@@ -36,4 +36,19 @@ language-servers = [ { name = "vscode-json-language-server", except-features = [
 [[language]]
 name = "go"
 auto-format = true
+language-servers = ["gopls", "golangci-lint2-langserver"]
 formatter = { command = "goimports" }
+
+[language-server.golangci-lint2-langserver]
+command = "golangci-lint-langserver"
+
+[language-server.golangci-lint2-langserver.config]
+command = [
+  "golangci-lint",
+  "run",
+  "--output.json.path",
+  "stdout",
+  "--show-stats=false",
+  "--issues-exit-code=1",
+]
+
