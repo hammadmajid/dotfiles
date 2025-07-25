@@ -13,10 +13,10 @@
 			"show_edit_predictions": false
 		}
 	},
-	"assistant": {
+	"agent": {
 		"default_model": {
-			"provider": "zed.dev",
-			"model": "claude-3-5-sonnet-latest"
+			"provider": "copilot_chat",
+			"model": "gpt-4.1"
 		},
 		"version": "2"
 	},
