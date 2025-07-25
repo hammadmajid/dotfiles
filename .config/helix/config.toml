@@ -1,0 +1,33 @@
+theme = "adwaita-dark"
+
+[editor]
+true-color = true
+color-modes = true
+line-number = "relative"
+cursorline = true
+bufferline = "always"
+scrolloff = 1
+popup-border = "all"
+
+[editor.lsp]
+display-messages = true
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "read-only-indicator", "file-modification-indicator", "version-control"]
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "block"
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
