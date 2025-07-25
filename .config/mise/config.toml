@@ -1,0 +1,4 @@
+[tools]
+node = "latest"
+usage = "latest"
+pnpm = "latest"
