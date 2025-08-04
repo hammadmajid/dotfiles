@@ -45,3 +45,4 @@ Backups
 .config/user-dirs.dirs
 .config/user-dirs.locale
 .pki
+.config/helix/runtime/grammars
