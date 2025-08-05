@@ -1,0 +1,30 @@
+layout {
+    tab name="files" {
+        pane {
+            borderless true
+            command "yazi"
+        }
+    }
+    tab name="editor" {
+        pane {
+            borderless true
+            command "helix"
+        }
+    }
+    tab name="shell" {
+        pane borderless=true
+    }
+    tab name="git" {
+        pane {
+            borderless true
+            command "lazygit"
+        }
+    }
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+}
+
