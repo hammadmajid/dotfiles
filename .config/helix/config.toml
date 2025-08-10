@@ -9,6 +9,9 @@ bufferline = "always"
 scrolloff = 1
 popup-border = "all"
 
+[editor.soft-wrap]
+enable = true
+
 [editor.lsp]
 display-messages = true
 
