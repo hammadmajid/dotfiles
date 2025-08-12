@@ -1,8 +1,14 @@
 layout {
-    tab name="files" {
+    tab name="git" {
         pane {
             borderless true
-            command "yazi"
+            command "lazygit"
+        }
+    }
+    tab name="agent" {
+        pane {
+            borderless true
+            command "opencode"
         }
     }
     tab name="editor" {
@@ -14,10 +20,10 @@ layout {
     tab name="shell" {
         pane borderless=true
     }
-    tab name="git" {
+    tab name="files" {
         pane {
             borderless true
-            command "lazygit"
+            command "yazi"
         }
     }
     default_tab_template {
