@@ -30,3 +30,8 @@ auto-format = true
 name = "json"
 language-servers = [ "typescript-language-server" ]
 auto-format = true
+
+[[language]]
+name = "go"
+auto-format = true
+formatter = { command = "goimports" }
