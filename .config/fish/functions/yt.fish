@@ -19,5 +19,6 @@ function yt
         --embed-metadata \
         --concurrent-fragments 8 \
         --cookies-from-browser chrome \
+        --sponsorblock-remove sponsor \
         "$url"
 end
