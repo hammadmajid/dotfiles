@@ -8,7 +8,7 @@ function yt
     mkdir -p ~/Videos/YouTube
 
     yt-dlp \
-        -f "bestvideo[height<=720][vcodec^=avc1]+bestaudio[acodec^=mp4a]/best[height<=720][vcodec^=avc1]" \
+        -f "bestvideo[height<=1080][vcodec^=avc1]+bestaudio[acodec^=mp4a]/best[height<=1080][vcodec^=avc1]" \
         -o "~/Videos/YouTube/%(title)s - %(channel)s.%(ext)s" \
         --merge-output-format mp4 \
         --progress \
