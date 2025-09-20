@@ -9,27 +9,22 @@ language-servers = [ "vscode-css-language-server", "tailwindcss-ls" ]
 [[language]]
 name = "javascript"
 language-servers = [ "typescript-language-server" ]
-auto-format = true
 
 [[language]]
 name = "typescript"
 language-servers = [ "typescript-language-server" ]
-auto-format = true
 
 [[language]]
 name = "tsx"
 language-servers = [ "typescript-language-server", "tailwindcss-ls" ]
-auto-format = true
 
 [[language]]
 name = "jsx"
 language-servers = [ "typescript-language-server", "tailwindcss-ls" ]
-auto-format = true
 
 [[language]]
 name = "json"
 language-servers = [ "typescript-language-server" ]
-auto-format = true
 
 [[language]]
 name = "go"
