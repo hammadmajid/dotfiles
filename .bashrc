@@ -10,3 +10,6 @@ alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
 alias hx=helix
+
+# opencode
+export PATH=/home/bine/.opencode/bin:$PATH
