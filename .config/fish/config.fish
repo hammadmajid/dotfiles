@@ -8,8 +8,6 @@ set -Ux EDITOR helix # package: helix
 # Aliases for commonly used commands
 # ----------------------------------
 #
-# Editor
-alias hx=helix
 # To use the default ls run `\ls`
 # Package: eza
 alias ls="eza --icons --group-directories-first"
