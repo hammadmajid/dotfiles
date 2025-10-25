@@ -1,3 +1,5 @@
 [tools]
 usage = "latest"
 pnpm = "latest"
+node = "latest"
+java = "17"
