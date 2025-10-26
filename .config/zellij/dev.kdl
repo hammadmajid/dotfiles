@@ -14,7 +14,7 @@ layout {
     tab name="editor" {
         pane {
             borderless true
-            command "helix"
+            command "hx"
         }
     }
     tab name="shell" {
