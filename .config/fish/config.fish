@@ -3,7 +3,7 @@ function fish_greeting
 end
 
 # Enviroment variables
-set -Ux EDITOR helix # package: helix
+set -Ux EDITOR hx # package: helix
 
 # Aliases for commonly used commands
 # ----------------------------------
@@ -35,7 +35,7 @@ alias :wq=exit
 
 #
 alias cdd="cd ~/Code"
-alias shx="sudo helix"
+alias shx="sudo hx"
 #
 # history grep alias
 alias hg="history | rg"
