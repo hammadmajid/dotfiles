@@ -4,14 +4,15 @@ program = "/usr/bin/fish"
 args = ["-l"]
 
 [general]
-import = [
-  "~/.config/alacritty/catppuccin-mocha.toml"
-]
+# import = [
+  # "~/.config/alacritty/catppuccin-mocha.toml"
+# ]
 [window]
 padding = {x = 0, y = 0}
 dynamic_padding = false
 title = "Alacritty"
 dynamic_title = true 
+decorations = "none"
 
 [scrolling]
 history = 10000
