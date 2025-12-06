@@ -54,7 +54,7 @@ starship init fish | source
 mise activate fish | source
 #
 # Package: atuin
-atuin init fish | source
+atuin init fish | sed "s/-k up/up/g" | source
 
 # pnpm
 set -gx PNPM_HOME "/home/bine/.local/share/pnpm"
