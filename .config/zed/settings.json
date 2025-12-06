@@ -7,6 +7,27 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "disable_ai": true,
+  "terminal": {
+    "cursor_shape": "bar"
+  },
+  "project_panel": {
+    "hide_root": true,
+    "default_width": 260.0,
+    "dock": "right"
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_sign_in": true,
+    "show_branch_icon": true
+  },
+  "base_keymap": "JetBrains",
+  "redact_private_values": true,
+  "helix_mode": true,
   "icon_theme": "JetBrains New UI Icons (Dark)",
   "ui_font_size": 16,
   "buffer_font_size": 16,
