@@ -1,7 +1,7 @@
 [tools]
 usage = "latest"
 pnpm = "latest"
-node = "latest"
+node = "24"
 java = "17"
 bun = "latest"
 go = "latest"
