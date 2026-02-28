@@ -11,3 +11,10 @@ disabled=true
 
 [azure]
 disabled=true
+
+[git_metrics]
+disabled=false
+
+[sudo]
+disabled=false
+
