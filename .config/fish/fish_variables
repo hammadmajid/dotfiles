@@ -3,6 +3,7 @@
 SETUVAR ANDROID_HOME:/home/bine/Android/Sdk
 SETUVAR --export CHROME_ENABLE_WAYLAND:1
 SETUVAR --export EDITOR:hx
+SETUVAR --export --path GOPATH:/home/bine/\x2ego
 SETUVAR QT_QPA_PLATFORM:wayland
 SETUVAR __fish_initialized:3800
 SETUVAR fish_color_autosuggestion:brblack
