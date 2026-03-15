@@ -1,6 +1,41 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "permission": {
-    "bash": "ask"
+    "bash": {
+      "*": "ask",
+
+      "ls *": "allow",
+      "pwd": "allow",
+      "whoami": "allow",
+      "date": "allow",
+      "uname *": "allow",
+
+      "cat *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "less *": "allow",
+      "more *": "allow",
+
+      "grep *": "allow",
+      "find *": "allow",
+      "wc *": "allow",
+      "sort *": "allow",
+      "uniq *": "allow",
+      "cut *": "allow",
+      "awk *": "allow",
+
+      "sed *": "allow",
+      "sed -i *": "ask",
+
+      "git *": "ask",
+      "npm *": "ask",
+      "pnpm *": "ask",
+
+      "cp *": "ask",
+      "mv *": "ask",
+      "rm *": "ask",
+      "chmod *": "ask",
+      "chown *": "ask"
+    }
   }
 }
