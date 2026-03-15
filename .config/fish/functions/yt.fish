@@ -5,7 +5,7 @@ function yt
         return 1
     end
 
-    mkdir -p ~/Videos/YouTube
+    mkdir -p ~/Downloads/YouTube
 
     yt-dlp \
         -f "bestvideo[height<=1080][vcodec^=avc1]+bestaudio[acodec^=mp4a]/best[height<=1080][vcodec^=avc1]" \
