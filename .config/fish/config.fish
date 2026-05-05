@@ -26,6 +26,9 @@ alias copy="xclip -selection clipboard"
 # Package: yazi
 alias yy=yazi
 #
+# Package: opencode
+alias oc=opencode
+#
 # Package: zellij
 alias zj=zellij
 #
