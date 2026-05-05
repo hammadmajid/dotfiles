@@ -2,7 +2,7 @@
 usage = "latest"
 pnpm = "latest"
 node = "24"
-java = "17"
+java = "21"
 bun = "latest"
 go = "latest"
 rust = "latest"
