@@ -7,7 +7,48 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "disable_ai": true,
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o",
+      "enable_thinking": false
+    },
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "prettier": {
+    "allowed": true
+  },
+  "format_on_save": "off",
+  "minimap": {
+    "show": "auto"
+  },
+  "auto_signature_help": true,
+  "show_signature_help_after_edits": true,
+  "sticky_scroll": {
+    "enabled": true
+  },
+  "which_key": {
+    "enabled": true
+  },
+  "autosave": "off",
+  "buffer_font_family": "JetBrainsMonoNL Nerd Font",
+  "use_system_prompts": false,
+  "use_system_path_prompts": false,
+  "calls": {
+    "mute_on_join": true
+  },
+  "disable_ai": false,
   "terminal": {
     "cursor_shape": "bar"
   },
@@ -27,8 +68,12 @@
   },
   "base_keymap": "JetBrains",
   "redact_private_values": true,
-  "helix_mode": true,
-  "icon_theme": "JetBrains New UI Icons (Dark)",
+  "helix_mode": false,
+  "icon_theme": {
+    "mode": "system",
+    "light": "JetBrains New UI Icons (Light)",
+    "dark": "JetBrains New UI Icons (Dark)"
+  },
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "theme": {
