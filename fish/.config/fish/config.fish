@@ -59,13 +59,6 @@ mise activate fish | source
 # Package: atuin
 atuin init fish | sed "s/-k up/up/g" | source
 
-# pnpm
-set -gx PNPM_HOME "/home/bine/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-    set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
-
 # Enable transient prompt for starship
 # See: https://starship.rs/advanced-config/#transientprompt-and-transientrightprompt-in-fish
 function starship_transient_prompt_func

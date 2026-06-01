@@ -1,9 +1,0 @@
-# This file contains fish universal variable definitions.
-# VERSION: 3.0
-SETUVAR ANDROID_HOME:/home/bine/Android/Sdk
-SETUVAR --export CHROME_ENABLE_WAYLAND:1
-SETUVAR --export EDITOR:hx
-SETUVAR --export --path GOPATH:/home/bine/\x2ego
-SETUVAR QT_QPA_PLATFORM:wayland
-SETUVAR __fish_initialized:4300
-SETUVAR fish_user_paths:/home/bine/\x2elocal/bin\x1e/home/bine/\x2eopencode/bin\x1e/home/bine/go/bin
