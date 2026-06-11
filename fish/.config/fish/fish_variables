@@ -2,4 +2,3 @@
 # VERSION: 3.0
 SETUVAR --export EDITOR:hx
 SETUVAR __fish_initialized:4300
-SETUVAR fish_user_paths:/home/bine/\x2eflutter/flutter\x1e/home/bine/\x2eopencode/bin\x1e/home/bine/\x2elocal/share/pnpm/bin
