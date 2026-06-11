@@ -66,3 +66,10 @@ function starship_transient_prompt_func
 end
 starship init fish | source
 enable_transience
+
+# pnpm
+set -gx PNPM_HOME "/home/bine/.local/share/pnpm"
+if not string match -q -- "$PNPM_HOME/bin" $PATH
+    set -gx PATH "$PNPM_HOME/bin" $PATH
+end
+# pnpm end
