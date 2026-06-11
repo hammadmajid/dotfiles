@@ -37,5 +37,11 @@
       "chmod *": "ask",
       "chown *": "ask"
     }
+  },
+  "mcp": {
+    "Website spec": {
+      "type": "remote",
+      "url": "https://mcp.specification.website/mcp"
+    }
   }
 }
