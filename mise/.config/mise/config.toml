@@ -1,6 +1,6 @@
 [tools]
 usage = "latest"
-pnpm = "11.5.0"
+pnpm = "latest"
 node = "24"
 java = "21"
 bun = "latest"
