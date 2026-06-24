@@ -17,11 +17,24 @@
     "dock": "left"
   },
   "agent": {
+    "tool_permissions": {
+      "default": "allow",
+      "tools": {
+        "delete_path": {
+          "default": "allow"
+        },
+        "create_directory": {
+          "default": "allow"
+        }
+      }
+    },
+    "default_profile": "write",
     "dock": "right",
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4o",
-      "enable_thinking": false
+      "effort": "low",
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-6",
+      "enable_thinking": true
     },
     "favorite_models": [],
     "model_parameters": []
@@ -67,7 +80,7 @@
     "show_branch_icon": true
   },
   "base_keymap": "JetBrains",
-  "redact_private_values": true,
+  "redact_private_values": false,
   "helix_mode": false,
   "icon_theme": {
     "mode": "system",
@@ -79,6 +92,6 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "JetBrains New Dark"
+    "dark": "JetBrains Dark"
   }
 }
