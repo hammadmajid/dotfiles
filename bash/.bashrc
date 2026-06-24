@@ -19,3 +19,7 @@ export PATH=/home/bine/.opencode/bin:$PATH
 export PATH="$PATH:$HOME/flutter/bin"
 export ANDROID_HOME="$HOME/Android/Sdk"
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/bine/.local/bin:$PATH"
