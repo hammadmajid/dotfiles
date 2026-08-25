@@ -77,3 +77,6 @@ end
 
 # Added by Antigravity CLI installer
 set -gx PATH "/home/bine/.local/bin" $PATH
+
+# nub
+set -gx PATH "$HOME/.nub/bin" $PATH
