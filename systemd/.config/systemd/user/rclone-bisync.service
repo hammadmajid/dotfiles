@@ -1,0 +1,8 @@
+[Unit]
+Description=rclone bisync Google Drive Home Backup Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/bine/.config/rclone/rclone-bisync-gdrive.sh

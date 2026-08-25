@@ -1,0 +1,23 @@
+# rclone bisync filter rules for /home/bine
+# Includes only user-specified directories:
+# Documents, Downloads, Pictures, Templates, Videos, Scratchpad
+
+# Include rules (relative to home root)
++ /Documents/**
++ /Pictures/**
++ /Templates/**
++ /Videos/**
++ /Scratchpad/**
++ /Downloads/**
+
+# Transient file & lock file exclusions
+- .Trash-1000/**
+- .Trash/**
+- **/.DS_Store
+- **/~lock.*
+- **/*.tmp
+- **/*.part
+- **/*.crdownload
+
+# Exclude all other root directories (Code, Android, dotfiles, flutter, go, etc.) and hidden dotdirs
+- *

@@ -1,2 +1,4 @@
 /cargo/.cargo
 /helix/.config/helix/runtime/grammars/sources
+/rclone/.config/rclone/rclone.conf
+*.log

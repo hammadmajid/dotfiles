@@ -1,0 +1,10 @@
+[Unit]
+Description=rclone bisync Google Drive Home Backup Timer (every 15 mins)
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+Unit=rclone-bisync.service
+
+[Install]
+WantedBy=timers.target
