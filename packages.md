@@ -46,7 +46,6 @@ Type: CLI, TUI, GUI, or Service.
 
 | App | Type | Notes |
 |---|---|---|
-| pCloud | GUI | Autostarts, mounts `~/pCloudDrive`. Being replaced by rclone, see `rclone.md` |
 | Paper | GUI | Design tool. Pairs with the paper-desktop Claude Code plugin |
 | T3 Code | GUI | Alpha. Has a URL handler entry |
 
