@@ -17,6 +17,13 @@
     "dock": "left"
   },
   "agent": {
+    "auto_compact": {
+      "threshold": "90%"
+    },
+    "sandbox_permissions": {
+      "allow_fs_write_all": true,
+      "allow_all_hosts": true
+    },
     "tool_permissions": {
       "default": "allow",
       "tools": {
@@ -75,13 +82,13 @@
     "git_status": true
   },
   "title_bar": {
+    "show_branch_status_icon": true,
     "show_onboarding_banner": false,
-    "show_sign_in": true,
-    "show_branch_icon": true
+    "show_sign_in": true
   },
   "base_keymap": "JetBrains",
   "redact_private_values": false,
-  "helix_mode": false,
+  "helix_mode": true,
   "icon_theme": {
     "mode": "system",
     "light": "JetBrains New UI Icons (Light)",
@@ -92,6 +99,6 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "JetBrains Dark"
+    "dark": "Gruvbox Light Hard"
   }
 }
