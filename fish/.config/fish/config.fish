@@ -56,6 +56,9 @@ starship init fish | source
 # Package: mise
 mise activate fish | source
 #
+# Package: direnv (installed via mise)
+direnv hook fish | source
+#
 # Package: atuin
 atuin init fish | sed "s/-k up/up/g" | source
 
