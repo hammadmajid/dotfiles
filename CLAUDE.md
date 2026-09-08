@@ -16,3 +16,7 @@ Passwordless sudo is configured for this user. Run `sudo` directly; never expect
 ## Removing software
 
 Inventory before acting: rpm, flatpak, AppImage, `/opt`, `~/.local/bin`, leftover `.repo` files and GPG keys under `/etc/pki/rpm-gpg`. Dry-run with `dnf remove --assumeno`, report what will go, and wait for confirmation. Home-directory data (`~/.config`, `~/.local/share`, `~/.cache`) stays unless the user says to purge it. Password databases and similar user files stay even then.
+
+## Google Drive sync
+
+`rlcone.md` documents the rclone bisync setup: what syncs, the Google Cloud OAuth client, first-run and new-device steps.
