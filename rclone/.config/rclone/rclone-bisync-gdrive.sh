@@ -42,7 +42,7 @@ for pair in "${PAIRS[@]}"; do
         --filter-from "${FILTER_FILE}" \
         --create-empty-src-dirs \
         --conflict-resolve newer \
-        --conflict-loser copy \
+        --conflict-loser num \
         --verbose \
         "$@" 2>&1 | tee -a "${LOG_FILE}"
     rc=${PIPESTATUS[0]}
