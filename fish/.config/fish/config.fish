@@ -26,11 +26,7 @@ alias copy="xclip -selection clipboard"
 # Package: yazi
 alias yy=yazi
 #
-# Package: opencode
-alias oc=opencode
 #
-# Package: zellij
-alias zj=zellij
 #
 # exit
 alias :q=exit
@@ -76,7 +72,6 @@ if not string match -q -- "$PNPM_HOME/bin" $PATH
     set -gx PATH "$PNPM_HOME/bin" $PATH
 end
 # pnpm end
-
 
 # Added by Antigravity CLI installer
 set -gx PATH "/home/bine/.local/bin" $PATH
