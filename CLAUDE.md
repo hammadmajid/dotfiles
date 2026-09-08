@@ -19,4 +19,4 @@ Inventory before acting: rpm, flatpak, AppImage, `/opt`, `~/.local/bin`, leftove
 
 ## Google Drive sync
 
-`rlcone.md` documents the rclone bisync setup: what syncs, the Google Cloud OAuth client, first-run and new-device steps.
+`rclone.md` documents the rclone bisync setup: what syncs, the Google Cloud OAuth client, first-run and new-device steps.
