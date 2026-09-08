@@ -122,6 +122,6 @@ cargo-binstall.
 - GNOME extensions (user-installed via Extension Manager): Accent Icons, Alphabetical App Grid, AppIndicator, Blur my Shell, Caffeine, Clipboard Indicator, Do Not Disturb While Screen Sharing, Edit Desktop Files, GSConnect, Just Perfection, Privacy Indicators Accent Color, Resource Monitor
 - Icon theme: MoreWaita from Copr
 - Cockpit installed, socket disabled
-- User systemd: `rclone-bisync.timer`, not yet enabled
+- User systemd: `rclone-bisync.timer`, enabled 2026-09-08 (bisync every 15 min)
 
 Not enumerated: extensions inside Zed, VS Code, and Android Studio.
