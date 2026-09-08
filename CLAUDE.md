@@ -1,6 +1,6 @@
 # Machine notes
 
-Fedora 44 Workstation with the CachyOS kernel, GNOME, fish shell. This repo is stow-managed: each top-level dir mirrors `$HOME` and `stow */` symlinks it in (see README.md). Deleting a symlink in `~/.config` never touches the repo copy.
+Fedora 44 Workstation with the stock Fedora kernel, GNOME, fish shell. This repo is stow-managed: each top-level dir mirrors `$HOME` and `stow */` symlinks it in (see README.md). Deleting a symlink in `~/.config` never touches the repo copy.
 
 ## Root access
 

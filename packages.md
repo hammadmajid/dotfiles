@@ -118,7 +118,7 @@ cargo-binstall.
 
 ## System-level extras
 
-- Kernel: CachyOS from Copr, with devel packages
+- Kernel: stock Fedora (CachyOS Copr kernel removed 2026-09-08)
 - GNOME extensions (user-installed via Extension Manager): Accent Icons, Alphabetical App Grid, AppIndicator, Blur my Shell, Caffeine, Clipboard Indicator, Do Not Disturb While Screen Sharing, Edit Desktop Files, GSConnect, Just Perfection, Privacy Indicators Accent Color, Resource Monitor
 - Icon theme: MoreWaita from Copr
 - Cockpit installed, socket disabled
