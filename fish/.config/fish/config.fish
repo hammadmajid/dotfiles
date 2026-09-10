@@ -1,5 +1,9 @@
-# Disable fish's default greeting
+# Report card instead of the default greeting, only in a terminal's first shell
+# (skipped in subshells and editor-embedded terminals). `sys -v` for the long form.
 function fish_greeting
+    if test "$SHLVL" -eq 1; and not set -q ZED_TERM; and test "$TERM_PROGRAM" != vscode
+        sys
+    end
 end
 
 # Enviroment variables

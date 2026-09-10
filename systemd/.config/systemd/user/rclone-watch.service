@@ -1,0 +1,11 @@
+[Unit]
+Description=Watch synced folders and trigger rclone bisync when they change
+
+[Service]
+ExecStart=%h/.config/rclone/rclone-watch.sh
+Restart=on-failure
+RestartSec=10s
+Nice=10
+
+[Install]
+WantedBy=default.target

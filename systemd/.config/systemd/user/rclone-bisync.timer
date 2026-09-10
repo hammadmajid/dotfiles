@@ -1,9 +1,9 @@
 [Unit]
-Description=rclone bisync Google Drive Home Backup Timer (every 15 mins)
+Description=rclone bisync Google Drive timer (pulls remote changes every 30 min; local changes are caught by rclone-watch)
 
 [Timer]
 OnBootSec=5min
-OnUnitActiveSec=15min
+OnUnitActiveSec=30min
 Unit=rclone-bisync.service
 
 [Install]

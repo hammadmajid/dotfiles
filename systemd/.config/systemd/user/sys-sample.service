@@ -1,0 +1,11 @@
+[Unit]
+Description=Sample CPU, network and pending updates every minute for the sys report card
+
+[Service]
+ExecStart=%h/.local/bin/sys-sample
+Restart=always
+RestartSec=10s
+Nice=15
+
+[Install]
+WantedBy=default.target

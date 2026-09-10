@@ -19,4 +19,4 @@ Inventory before acting: rpm, flatpak, AppImage, `/opt`, `~/.local/bin`, leftove
 
 ## Google Drive sync
 
-`rclone.md` documents the rclone bisync setup: what syncs, the Google Cloud OAuth client, first-run and new-device steps.
+`rclone.md` documents the rclone bisync setup: what syncs, when (inotify watcher plus 30 min timer), notifications, the `drive` and `sys` fish functions, the Google Cloud OAuth client, and new-device steps. The pair list in `rclone-bisync-gdrive.sh` is the single source of truth; the watcher and `drive` parse it.

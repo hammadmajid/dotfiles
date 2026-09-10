@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+# Long-running sampler for the `sys` fish report card. Every INTERVAL seconds it
+# writes CPU busy %, network throughput and name on the default route interface,
+# failed systemd unit counts, and the pending dnf update count (refreshed hourly)
+# to a small file on tmpfs. Anything slower than a few ms belongs here, not in `sys`.
+set -u
+
+INTERVAL=60
+UPDATES_EVERY=3600
+OUT="${XDG_RUNTIME_DIR:-/tmp}/sys-sample"
+
+cpu_ticks() { # prints "busy idle"
+    local _ u n s i w q sq st
+    read -r _ u n s i w q sq st _ < /proc/stat
+    echo "$((u + n + s + q + sq + st)) $((i + w))"
+}
+
+net_iface() { ip -o route get 1.1.1.1 2>/dev/null | sed -nE 's/.* dev ([^ ]+).*/\1/p'; }
+
+net_bytes() { # prints "rx tx" for the interface, or "0 0"
+    local d="$1"
+    if [ -n "$d" ] && [ -r "/sys/class/net/$d/statistics/rx_bytes" ]; then
+        echo "$(cat "/sys/class/net/$d/statistics/rx_bytes") $(cat "/sys/class/net/$d/statistics/tx_bytes")"
+    else
+        echo "0 0"
+    fi
+}
+
+updates=""
+updates_at=0
+cores=$(nproc)
+
+net_name() { # prints "type name" of the first connected NetworkManager device
+    nmcli -t -f TYPE,STATE,CONNECTION device status 2>/dev/null |
+        awk -F: '$2 == "connected" { print $1, $3; exit }'
+}
+
+read -r busy0 idle0 <<< "$(cpu_ticks)"
+iface=$(net_iface)
+read -r rx0 tx0 <<< "$(net_bytes "$iface")"
+last_ts=$(date +%s)
+
+first=1
+while true; do
+    # short first interval so the file exists right after login
+    if [ "$first" = 1 ]; then sleep 2; first=0; else sleep "$INTERVAL"; fi
+
+    read -r busy1 idle1 <<< "$(cpu_ticks)"
+    total=$(( (busy1 - busy0) + (idle1 - idle0) ))
+    if [ "$total" -gt 0 ]; then
+        cpu=$(( (busy1 - busy0) * 1000 / total ))
+        cpu="$((cpu / 10)).$((cpu % 10))"
+    else
+        cpu="0.0"
+    fi
+    busy0=$busy1; idle0=$idle1
+
+    new_iface=$(net_iface)
+    read -r rx1 tx1 <<< "$(net_bytes "$new_iface")"
+    elapsed=$(( $(date +%s) - ${last_ts:-0} ))
+    if [ "$new_iface" = "$iface" ] && [ "$rx1" -ge "$rx0" ] && [ "$elapsed" -gt 0 ]; then
+        rx=$(( (rx1 - rx0) / elapsed ))
+        tx=$(( (tx1 - tx0) / elapsed ))
+    else
+        rx=0; tx=0
+    fi
+    iface=$new_iface; rx0=$rx1; tx0=$tx1
+
+    now=$(date +%s)
+    last_ts=$now
+    read -r net_type net_conn <<< "$(net_name)"
+    failed_sys=$(systemctl --failed --no-legend --plain 2>/dev/null | grep -c .)
+    failed_usr=$(systemctl --user --failed --no-legend --plain 2>/dev/null | grep -c .)
+
+    if [ $(( now - updates_at )) -ge "$UPDATES_EVERY" ]; then
+        updates=$(dnf --cacheonly -q check-upgrade 2>/dev/null | grep -c '^[[:alnum:]]')
+        updates_at=$now
+    fi
+
+    printf 'ts=%s\ncores=%s\ncpu=%s\niface=%s\nrx=%s\ntx=%s\nnet_type=%s\nnet_name=%s\nfailed_sys=%s\nfailed_usr=%s\nupdates=%s\n' \
+        "$now" "$cores" "$cpu" "$iface" "$rx" "$tx" "${net_type:-}" "${net_conn:-}" "$failed_sys" "$failed_usr" "$updates" \
+        > "$OUT.tmp" && mv "$OUT.tmp" "$OUT"
+done

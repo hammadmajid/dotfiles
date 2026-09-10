@@ -105,7 +105,8 @@ cargo-binstall.
 | just, bear, ninja-build, sccache | CLI | Build helpers |
 | typst, pandoc | CLI | Documents |
 | uv, mise | CLI | Package managers |
-| rclone, rsync | CLI | Sync |
+| rclone, rsync | CLI | Sync. rclone drives the Google Drive bisync, see `rclone.md` |
+| inotify-tools | CLI | `inotifywait` for the Drive sync watcher |
 | yt-dlp | CLI | Used by the `yt` and `ytm` fish functions |
 | kubectl | CLI | |
 | docker-ce, compose, buildx | Service | Docker daemon enabled. No images kept |
@@ -121,6 +122,7 @@ cargo-binstall.
 - GNOME extensions (user-installed via Extension Manager): Accent Icons, Alphabetical App Grid, AppIndicator, Blur my Shell, Caffeine, Clipboard Indicator, Do Not Disturb While Screen Sharing, Edit Desktop Files, GSConnect, Just Perfection, Privacy Indicators Accent Color, Resource Monitor
 - Icon theme: MoreWaita from Copr
 - Cockpit installed, socket disabled
-- User systemd: `rclone-bisync.timer`, enabled 2026-09-08 (bisync every 15 min)
+- User systemd: `rclone-bisync.timer` (Drive pull every 30 min), `rclone-watch.service` (inotify trigger for local changes), `sys-sample.service` (feeds the `sys` report card). All enabled.
+- Fish functions of note: `sys` (report card, also the greeting), `drive` (sync control), `yt`, `ytm`
 
 Not enumerated: extensions inside Zed, VS Code, and Android Studio.
