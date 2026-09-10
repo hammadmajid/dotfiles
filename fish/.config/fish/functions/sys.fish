@@ -1,31 +1,12 @@
-function sys --description 'Compact system and Drive sync report card (sys -v for detail)'
+function sys --description 'System and Drive sync report card as an aligned grid (sys -v for detail)'
     set -l verbose 0
     contains -- -v $argv; and set verbose 1
-
-    # Nerd Font glyphs
-    set -l i_cpu ''
-    set -l i_load '󰓅'
-    set -l i_ram '󰍛'
-    set -l i_swap '󰓡'
-    set -l i_temp ''
-    set -l i_up ''
-    set -l i_disk '󰋊'
-    set -l i_wifi ''
-    set -l i_eth '󰈀'
-    set -l i_ts '󰖟'
-    set -l i_bat ''
-    set -l i_plug ''
-    set -l i_fail ''
-    set -l i_upd ''
-
-    set -l dim (set_color --dim)
-    set -l n (set_color normal)
 
     # Everything below reads /proc, /sys and one small file; external commands are kept to a handful
     # so a new shell is not held up. Slow facts come from sys-sample.service via $XDG_RUNTIME_DIR/sys-sample.
 
     # ---- sampled values (written every minute by sys-sample.service) ----
-    set -l cpu -; set -l rx 0; set -l tx 0; set -l updates -; set -l sample_age -1; set -l cores 1
+    set -l cpu -; set -l rx 0; set -l tx 0; set -l updates -; set -l sample_age -1
     set -l net_type ''; set -l net_name offline; set -l failed_sys 0; set -l failed_usr 0
     set -l sample $XDG_RUNTIME_DIR/sys-sample
     test -n "$XDG_RUNTIME_DIR"; or set sample /run/user/(id -u)/sys-sample
@@ -36,7 +17,6 @@ function sys --description 'Compact system and Drive sync report card (sys -v fo
                 case cpu; set cpu $v
                 case rx; set rx $v
                 case tx; set tx $v
-                case cores; set cores $v
                 case updates; test -n "$v"; and set updates $v
                 case net_type; set net_type $v
                 case net_name; test -n "$v"; and set net_name $v
@@ -46,12 +26,15 @@ function sys --description 'Compact system and Drive sync report card (sys -v fo
             end
         end < (string replace = ' ' < $sample | psub)
     end
+    set -l stale 0
+    test $sample_age -lt 0 -o $sample_age -gt 180; and set stale 1
 
-    # ---- line 1: compute ----
-    read -l load1 load5 load15 rest < /proc/loadavg
-    set -l load_color (_sys_level $load1 (math $cores x 0.7) $cores)
+    set -l cells
+
+    # ---- compute ----
     set -l cpu_color green
     test $cpu != -; and set cpu_color (_sys_level $cpu 70 90)
+    set -a cells "$cpu_color"\t'󰻠'\tcpu\t"$cpu%"
 
     set -l mem_total 0; set -l mem_avail 0; set -l swap_total 0; set -l swap_free 0
     while read -l k v rest
@@ -63,13 +46,15 @@ function sys --description 'Compact system and Drive sync report card (sys -v fo
         end
     end < /proc/meminfo
     set -l mem_used (math $mem_total - $mem_avail)
-    set -l mem_color (_sys_level (math -s0 $mem_used x 100 / $mem_total) 75 90)
+    set -a cells (_sys_level (math -s0 $mem_used x 100 / $mem_total) 75 90)\t'󰍛'\tram\t(_sys_gb $mem_used)G
+
     set -l swap_used (math $swap_total - $swap_free)
     set -l swap_color green
     if test $swap_total -gt 0
         test $swap_used -gt 0; and set swap_color yellow
         test (math -s0 $swap_used x 100 / $swap_total) -ge 50; and set swap_color red
     end
+    set -a cells "$swap_color"\t'󰓡'\tswap\t(_sys_gb $swap_used)G
 
     set -l temp -
     set -l temp_color green
@@ -82,19 +67,9 @@ function sys --description 'Compact system and Drive sync report card (sys -v fo
             break
         end
     end
+    set -a cells "$temp_color"\t'󰔏'\ttemp\t"$temp°C"
 
-    read -l up rest < /proc/uptime
-    set -l uptime (_sys_rel (math -s0 $up))
-
-    printf '%s%s %s%%%s %s%s %s %s %s%s  %s%s %s/%sG%s  %s%s %s/%sG%s  %s%s %s°C%s  %s%s %s%s\n' \
-        (set_color $cpu_color) $i_cpu $cpu $n \
-        (set_color $load_color) $i_load $load1 $load5 $load15 $n \
-        (set_color $mem_color) $i_ram (_sys_gb $mem_used) (_sys_gb $mem_total) $n \
-        (set_color $swap_color) $i_swap (_sys_gb $swap_used) (_sys_gb $swap_total) $n \
-        (set_color $temp_color) $i_temp $temp $n \
-        $dim $i_up $uptime $n
-
-    # ---- line 2: storage and network ----
+    # ---- storage and network ----
     # one df call: root always; boot partitions only when getting full; external drives whenever mounted
     for line in (df --output=used,size,pcent,target -x tmpfs -x devtmpfs -x efivarfs 2>/dev/null | tail -n +2)
         set -l d (string split -n ' ' $line)
@@ -102,75 +77,100 @@ function sys --description 'Compact system and Drive sync report card (sys -v fo
         set -l c (_sys_level $p 80 90)
         switch $d[4]
             case /
-                printf '%s%s %s/%sG %s%%%s' (set_color $c) $i_disk (_sys_gb $d[1]) (_sys_gb $d[2]) $p $n
+                set -a cells "$c"\t'󰋊'\tdisk\t(math -s0 $d[1] / 1048576)/(math -s0 $d[2] / 1048576)G
             case /boot /boot/efi
-                test $p -ge 80; and printf '  %s%s %s %s%%%s' (set_color $c) $i_disk $d[4] $p $n
+                test $p -ge 80; and set -a cells "$c"\t'󰋊'\t(string replace / '' $d[4])\t"$p%"
             case '/run/media/*'
-                printf '  %s%s %s %s/%sG %s%%%s' (set_color $c) $i_disk (string split -r -m1 / $d[4])[2] (_sys_gb $d[1]) (_sys_gb $d[2]) $p $n
+                set -a cells "$c"\t'󰋊'\t(string split -r -m1 / $d[4])[2]\t"$p%"
         end
     end
 
-    set -l net_icon $i_wifi; set -l net_color green
-    test "$net_type" = ethernet; and set net_icon $i_eth
+    set -l net_icon '󰖩'; set -l net_label wifi; set -l net_color green
+    if test "$net_type" = ethernet
+        set net_icon '󰈀'; set net_label eth
+    end
     test "$net_name" = offline; and set net_color red
-    set -l ts_color red
+    set -a cells "$net_color"\t$net_icon\t$net_label\t$net_name
+    set -a cells green\t'󰌘'\tnet\t"↓"(_sys_rate $rx)" ↑"(_sys_rate $tx)
+
+    # tailscale interface state
+    set -l ts_color red; set -l ts_word down
     if test -r /sys/class/net/tailscale0/operstate
         read -l ts_state < /sys/class/net/tailscale0/operstate
-        test "$ts_state" = unknown -o "$ts_state" = up; and set ts_color green
+        if test "$ts_state" = unknown -o "$ts_state" = up
+            set ts_color green; set ts_word up
+        end
     end
-    printf '  %s%s %s%s %s↓%s ↑%s%s  %s%s ts%s\n' \
-        (set_color $net_color) $net_icon $net_name $n \
-        $dim (_sys_rate $rx) (_sys_rate $tx) $n \
-        (set_color $ts_color) $i_ts $n
+    set -a cells "$ts_color"\t'󰖂'\ttailscale\t$ts_word
 
-    # ---- line 3: power and health ----
+    # ---- power and health ----
     set -l bat /sys/class/power_supply/BAT0
     if test -d $bat
         read -l cap < $bat/capacity
         read -l bstate < $bat/status
         set bstate (string lower $bstate)
-        test "$bstate" = 'not charging'; and set bstate plugged
         set -l bcolor green
-        set -l bicon $i_plug
-        set -l remaining ''
-        if test $bstate = discharging
-            set bicon $i_bat
-            test $cap -lt 30; and set bcolor yellow
-            test $cap -lt 15; and set bcolor red
-        end
-        if test -r $bat/charge_now -a -r $bat/current_now
-            read -l cur < $bat/current_now
-            if test $cur -gt 0
-                read -l q < $bat/charge_now
-                read -l full < $bat/charge_full
-                if test $bstate = discharging
-                    set remaining (_sys_rel (math -s0 $q x 3600 / $cur))
-                else if test $bstate = charging
-                    set remaining (_sys_rel (math -s0 '('$full - $q')' x 3600 / $cur))
+        set -l bicon '󰁹'
+        set -l bvalue "$cap%"
+        switch $bstate
+            case charging
+                set bicon '󰂄'
+                set bvalue "$cap% charging"
+            case discharging
+                test $cap -lt 80; and set bicon '󰁾'
+                test $cap -lt 40; and set bicon '󰁻'
+                test $cap -lt 30; and set bcolor yellow
+                test $cap -lt 15; and set bcolor red
+                if test -r $bat/charge_now -a -r $bat/current_now
+                    read -l cur < $bat/current_now
+                    read -l q < $bat/charge_now
+                    test $cur -gt 0; and set bvalue "$cap% "(_sys_rel (math -s0 $q x 3600 / $cur))
                 end
-            end
+            case '*'
+                set bvalue "$cap% plugged"
         end
-        printf '%s%s %s%% %s%s' (set_color $bcolor) $bicon $cap $bstate $n
-        test -n "$remaining"; and printf ' %s%s%s' $dim $remaining $n
+        set -a cells "$bcolor"\t$bicon\tbat\t$bvalue
     else
-        printf '%s%s AC%s' (set_color green) $i_plug $n
+        set -a cells green\t'󰚥'\tpower\tAC
     end
 
     set -l failed (math $failed_sys + $failed_usr)
     set -l fcolor green
     test $failed -gt 0; and set fcolor yellow
-    printf '  %s%s %s failed%s' (set_color $fcolor) $i_fail $failed $n
+    set -a cells "$fcolor"\t'󰗖'\tfailed\t$failed
 
-    set -l ucolor $dim
-    test "$updates" != - -a "$updates" != 0; and set ucolor (set_color yellow)
-    printf '  %s%s %s updates%s' $ucolor $i_upd $updates $n
-    if test $sample_age -lt 0 -o $sample_age -gt 180
-        printf '  %s(sampler stale, run: drive watch)%s' (set_color red) $n
+    set -l ucolor normal
+    test "$updates" != - -a "$updates" != 0; and set ucolor yellow
+    set -a cells "$ucolor"\t'󰏖'\tupdates\t$updates
+
+    read -l up rest < /proc/uptime
+    set -a cells normal\t'󰅐'\tup\t(_sys_rel (math -s0 $up))
+
+    # ---- Drive sync ----
+    set -l state; set -l color; set -l word; set -l next; set -l timer; set -l watch; set -l conflicts; set -l dfailed; set -l skipped; set -l error
+    for kv in (_drive_facts)
+        set -l p (string split -m1 = $kv)
+        test $p[1] = failed; and set p[1] dfailed
+        set $p[1] $p[2]
     end
-    echo
+    set -l sicon '󱋌'
+    switch $color
+        case red; set sicon '󰧠'
+        case yellow; set sicon '󰨹'
+        case blue; set sicon '󱋖'
+    end
+    set -a cells "$color"\t$sicon\tsync\t$word
+    set -l timer_color green; test $timer = active; or begin; set timer_color red; set next off; end
+    set -a cells "$timer_color"\t'󰔛'\tnext\t$next
+    set -l watch_color green; set -l watch_word on
+    test $watch = active; or begin; set watch_color red; set watch_word off; end
+    set -a cells "$watch_color"\t'󰛐'\twatch\t$watch_word
+    set -l conf_color green; test $conflicts -gt 0; and set conf_color yellow
+    set -a cells "$conf_color"\t'󰩌'\tconflicts\t$conflicts
 
-    # ---- line 4 (and 5 when unhealthy): Drive sync ----
-    _drive_line
+    _sys_grid $cells
+    _drive_attention $dfailed $skipped $error
+    test $stale -eq 1; and printf '%s󰗖 sampler stale, run: drive watch%s\n' (set_color red) (set_color normal)
 
     # ---- verbose extras ----
     if test $verbose -eq 1
@@ -197,6 +197,36 @@ function sys --description 'Compact system and Drive sync report card (sys -v fo
         set_color --dim; echo drive; set_color normal
         drive status | tail -n +2 | sed 's/^/  /'
     end
+end
+
+# Print cells as an aligned grid. Each cell is "color<TAB>icon<TAB>label<TAB>value";
+# icon and value take the colour, the label is dim. Column count follows the terminal width.
+function _sys_grid
+    set -l width 23
+    set -l term $COLUMNS
+    test -n "$term"; or set term 80
+    set -l cols (math -s0 $term / $width)
+    test $cols -lt 1; and set cols 1
+    test $cols -gt 4; and set cols 4
+    set -l n (set_color normal)
+    set -l dim (set_color --dim)
+    set -l i 0
+    for cell in $argv
+        set -l f (string split \t -- $cell)
+        set i (math $i + 1)
+        set -l value $f[4]
+        # keep a long value (an SSID, say) inside its column
+        set -l room (math $width - 3 - (string length -- $f[3]))
+        test (string length --visible -- $value) -gt $room; and set value (string sub -l (math $room - 1) -- $value)…
+        printf '%s%s %s%s %s%s%s' (set_color $f[1]) $f[2] $dim $f[3] (set_color $f[1]) $value $n
+        if test (math $i % $cols) -eq 0
+            echo
+        else
+            set -l pad (math $width - (string length --visible -- "$f[2] $f[3] $value"))
+            test $pad -gt 0; and printf '%'$pad's' ''
+        end
+    end
+    test (math $i % $cols) -ne 0; and echo
 end
 
 # green below warn, yellow below crit, red otherwise
