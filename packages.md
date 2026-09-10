@@ -47,7 +47,6 @@ Type: CLI, TUI, GUI, or Service.
 | App | Type | Notes |
 |---|---|---|
 | Paper | GUI | Design tool. Pairs with the paper-desktop Claude Code plugin |
-| T3 Code | GUI | Alpha. Has a URL handler entry |
 
 ## Developer tooling
 
