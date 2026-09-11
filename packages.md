@@ -1,6 +1,6 @@
 # Installed software
 
-Everything user-installed on this machine, by install channel. System packages and dependencies are left out. Regenerated 2026-09-08 after a cleanup pass.
+Everything user-installed on this machine, by install channel. System packages and dependencies are left out. Regenerated 2026-09-08 after a cleanup pass; kept current since.
 
 Type: CLI, TUI, GUI, or Service.
 
@@ -122,6 +122,6 @@ cargo-binstall.
 - Icon theme: MoreWaita from Copr
 - Cockpit installed, socket disabled
 - User systemd: `rclone-bisync.timer` (Drive pull every 30 min), `rclone-watch.service` (inotify trigger for local changes), `sys-sample.service` (feeds the `sys` report card). All enabled.
-- Fish functions of note: `sys` (report card, also the greeting), `drive` (sync control), `yt`, `ytm`
+- Fish functions of note: `sys` (report card, also the greeting), `drive` (sync control), `envs` (Infisical backup), `yt`, `ytm`
 
 Not enumerated: extensions inside Zed, VS Code, and Android Studio.
