@@ -78,7 +78,7 @@ cargo-binstall.
 
 ### Node globals
 
-- npm: ast-grep, openapi-generator-cli, turbo, vercel
+- npm: ast-grep, openapi-generator-cli, todoist-cli (`td`), turbo, vercel
 - pnpm: language servers for Astro, Tailwind, Bash, Docker, YAML, SQL, Svelte, TypeScript, GitHub Actions, Compose; vscode-langservers-extracted; portless
 - bun: oh-my-posh
 
