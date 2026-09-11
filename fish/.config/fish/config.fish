@@ -77,8 +77,9 @@ if not string match -q -- "$PNPM_HOME/bin" $PATH
 end
 # pnpm end
 
-# Added by Antigravity CLI installer
+# local tools and the self-hosted Infisical instance
 set -gx PATH "/home/bine/.local/bin" $PATH
+set -gx INFISICAL_DOMAIN https://secrets.kryft.dev/api
 
 # nub
 set -gx PATH "$HOME/.nub/bin" $PATH

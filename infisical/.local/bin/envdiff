@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+"""Compare two dotenv files by key and value hash, or strip a dotenv file for upload.
+
+  envdiff A B [nameA nameB]   report same/differ/only-in counts and key names; never prints a value
+  envdiff strip SRC DST       copy SRC to DST minus empty values and DOPPLER_* markers; prints skipped keys
+"""
+import sys, hashlib, re
+
+KV = re.compile(r'^(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=(.*)$')
+
+def unquote(v):
+    v = v.strip()
+    if len(v) >= 2 and v[0] == v[-1] and v[0] in '"\'':
+        v = v[1:-1]
+    return v
+
+def load(path):
+    """key -> value hash; empty values and DOPPLER_* markers are left out, as strip() leaves them out of uploads"""
+    d, empty = {}, []
+    for line in open(path, errors='replace'):
+        s = line.strip()
+        if not s or s.startswith('#'):
+            continue
+        m = KV.match(s)
+        if not m or m.group(1).startswith('DOPPLER_'):
+            continue
+        v = unquote(m.group(2))
+        if v == '':
+            empty.append(m.group(1)); continue
+        d[m.group(1)] = hashlib.sha256(v.encode()).hexdigest()[:10]
+    return d, empty
+
+def strip(src, dst):
+    out, skipped = [], []
+    for line in open(src, errors='replace'):
+        s = line.rstrip('\n')
+        m = KV.match(s.strip())
+        if m and (unquote(m.group(2)) == '' or m.group(1).startswith('DOPPLER_')):
+            skipped.append(m.group(1)); continue
+        out.append(s)
+    with open(dst, 'w') as f:
+        f.write('\n'.join(out) + '\n')
+    if skipped:
+        print('  skipped (empty or DOPPLER_*): ' + ' '.join(skipped))
+
+def diff(pa, pb, na, nb):
+    (a, ea), (b, eb) = load(pa), load(pb)
+    only_a = sorted(set(a) - set(b)); only_b = sorted(set(b) - set(a))
+    differ = sorted(k for k in a if k in b and a[k] != b[k])
+    same = sum(1 for k in a if k in b and a[k] == b[k])
+    print(f'{same} same, {len(differ)} differ, {len(only_a)} only in {na}, {len(only_b)} only in {nb}')
+    for k in differ: print(f'  differ: {k}')
+    for k in only_a: print(f'  only {na}: {k}')
+    for k in only_b: print(f'  only {nb}: {k}')
+    if ea: print(f'  empty in {na}, not stored: ' + ' '.join(ea))
+    return 0 if not (differ or only_a or only_b) else 1
+
+if __name__ == '__main__':
+    args = sys.argv[1:]
+    if len(args) == 3 and args[0] == 'strip':
+        strip(args[1], args[2])
+    elif len(args) in (2, 4):
+        sys.exit(diff(args[0], args[1], *(args[2:] or ('a', 'b'))))
+    else:
+        print(__doc__); sys.exit(2)

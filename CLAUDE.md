@@ -20,3 +20,7 @@ Inventory before acting: rpm, flatpak, AppImage, `/opt`, `~/.local/bin`, leftove
 ## Google Drive sync
 
 `rclone.md` documents the rclone bisync setup: what syncs, when (inotify watcher plus 30 min timer), notifications, the `drive` and `sys` fish functions, the Google Cloud OAuth client, and new-device steps. The pair list in `rclone-bisync-gdrive.sh` is the single source of truth; the watcher and `drive` parse it.
+
+## Secrets
+
+`secrets.md` documents the self-hosted Infisical setup, the project map, the `envs` fish function and the Doppler fallback. Never read a secret value: work file-to-file through `$XDG_RUNTIME_DIR` and compare with `envdiff`, which prints keys and hash counts only.

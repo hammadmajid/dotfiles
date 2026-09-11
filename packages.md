@@ -109,7 +109,7 @@ cargo-binstall.
 | yt-dlp | CLI | Used by the `yt` and `ytm` fish functions |
 | kubectl | CLI | |
 | docker-ce, compose, buildx | Service | Docker daemon enabled. No images kept |
-| doppler, infisical, tailscale | CLI | Tailscale daemon enabled. Infisical from its own repo (`infisical-cli.repo`) |
+| doppler, infisical, tailscale | CLI | Tailscale daemon enabled. Infisical from its own repo (`infisical-cli.repo`), pointed at the self-hosted instance via `INFISICAL_DOMAIN`; see `secrets.md` |
 | android-tools | CLI | adb, fastboot |
 | xclip, wtype, dos2unix, mtr, nmap-ncat, sysbench, bcc-tools, wireguard-tools, sos | CLI | Utilities |
 | gamemode | Service | No consumer since Steam was removed |
