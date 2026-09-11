@@ -5,4 +5,8 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/home/bine/.config/rclone/rclone-bisync-gdrive.sh
+# Block suspend while a run is in flight: a lid close mid-listing leaves
+# requests holding an expired OAuth token, which 401 on resume and abort
+# the pair. The cap keeps a hung run from holding the laptop awake.
+ExecStart=/usr/bin/systemd-inhibit --what=sleep --who=rclone-bisync --why="Google Drive sync in progress" --mode=block /home/bine/.config/rclone/rclone-bisync-gdrive.sh
+TimeoutStartSec=45min

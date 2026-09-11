@@ -23,7 +23,7 @@ The pair list lives in `rclone-bisync-gdrive.sh` and is the single source of tru
 - **Remote change**: `rclone-bisync.timer` runs the sync 30 minutes after the previous run. Uploads from the Drive web or mobile app arrive on the laptop through this path only, so run `drive pull` if one is needed sooner.
 - **No network**: the run is skipped silently and recorded as `offline`.
 
-Both paths go through `rclone-bisync.service`, so two runs never overlap; a trigger during a run simply waits for it. Moves and renames are matched by hash (`--track-renames`) and become server-side moves on Drive instead of a delete plus re-upload. `--resilient --recover` lets the next run heal after a network blip without a resync.
+Both paths go through `rclone-bisync.service`, so two runs never overlap; a trigger during a run simply waits for it. Moves and renames are matched by hash (`--track-renames`) and become server-side moves on Drive instead of a delete plus re-upload. `--resilient --recover` lets the next run heal after a network blip without a resync. The service runs under `systemd-inhibit --what=sleep --mode=block`, so closing the lid mid-run keeps the laptop awake until the run ends (capped at 45 minutes by `TimeoutStartSec`); without it, listings caught by a suspend resume with an expired OAuth token, fail with 401, and abort the pair until the next run.
 
 ## Notifications
 
