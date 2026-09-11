@@ -26,7 +26,7 @@ PAIRS=(
     "Videos=gdrive:Videos"
     "Templates=gdrive:Templates"
     "Scratchpad=gdrive:Scratchpad"
-    "Downloads/Archive=gdrive:Downloads"
+    "Downloads=gdrive:Downloads"
 )
 
 mkdir -p "${STATE_DIR}"

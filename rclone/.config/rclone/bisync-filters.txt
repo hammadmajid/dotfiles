@@ -8,3 +8,6 @@
 - **/*.tmp
 - **/*.part
 - **/*.crdownload
+- **/*.partial
+- **/client_secret_*.json
+- **/Backup-codes*

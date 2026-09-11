@@ -11,9 +11,9 @@ Selected home folders are kept in two-way sync with same-named top-level folders
 | `~/Videos` | `gdrive:Videos` |
 | `~/Templates` | `gdrive:Templates` |
 | `~/Scratchpad` | `gdrive:Scratchpad` |
-| `~/Downloads/Archive` | `gdrive:Downloads` |
+| `~/Downloads` | `gdrive:Downloads` |
 
-Nothing else in `~/Downloads` syncs. `~/Code`, `~/dotfiles`, SDKs, and dot-directories are never touched. There is no per-file size cap. Trash folders, lock files, and partial downloads are excluded via `bisync-filters.txt`.
+All of `~/Downloads` syncs, including its `Archive` subfolder. OAuth client JSONs and backup-code files are excluded by name so a stray download never lands on Drive. `~/Code`, `~/dotfiles`, SDKs, and dot-directories are never touched. There is no per-file size cap. Trash folders, lock files, and partial downloads are excluded via `bisync-filters.txt`.
 
 The pair list lives in `rclone-bisync-gdrive.sh` and is the single source of truth: the watcher and the `drive` function read it from there. Add or remove a line, then run `drive resync` once and `drive watch` to restart the watcher.
 
@@ -49,7 +49,7 @@ The sync script sends desktop notifications itself:
 | `drive watch` | show the watcher, timer and sampler, start any that are down |
 | `drive skip [pair]` | list or toggle muted skip notifications |
 
-Pair names are the local path relative to `~`, for example `Documents` or `Downloads/Archive`.
+Pair names are the local path relative to `~`, for example `Documents` or `Downloads`.
 
 ## Files
 
@@ -86,7 +86,7 @@ Own OAuth client in project `bine` (ID `bine-42`), Google Auth Platform:
 3. Pull everything down, establish the bisync baseline, enable the units:
    ```bash
    for d in Documents Pictures Videos Templates Scratchpad; do rclone copy gdrive:$d ~/$d -P; done
-   rclone copy gdrive:Downloads ~/Downloads/Archive -P
+   rclone copy gdrive:Downloads ~/Downloads -P
    ~/.config/rclone/rclone-bisync-gdrive.sh --resync
    systemctl --user daemon-reload
    systemctl --user enable --now rclone-bisync.timer rclone-watch.service sys-sample.service
