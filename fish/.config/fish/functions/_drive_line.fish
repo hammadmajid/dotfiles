@@ -1,7 +1,7 @@
 # One-line Drive sync summary for `drive status`, plus attention lines when something is off.
 function _drive_line
     set -l f (_drive_facts)
-    set -l state; set -l color; set -l word; set -l next; set -l timer; set -l watch; set -l conflicts; set -l failed; set -l skipped; set -l error
+    set -l state; set -l color; set -l word; set -l next; set -l timer; set -l watch; set -l conflicts; set -l failed; set -l skipped; set -l error; set -l inhibit
     for kv in $f
         set -l p (string split -m1 = $kv)
         set $p[1] $p[2]
@@ -23,5 +23,5 @@ function _drive_line
     printf '  %s󰔛 %snext %s%s' (set_color $timer_color) $dim (set_color $timer_color) $next
     printf '  %s󰛐 %swatch %s%s' (set_color $watch_color) $dim (set_color $watch_color) (test $watch = active; and echo on; or echo off)
     printf '  %s󰩌 %sconflicts %s%s%s\n' (set_color $conf_color) $dim (set_color $conf_color) $conflicts $n
-    _drive_attention $failed $skipped $error
+    _drive_attention $failed $skipped $error $inhibit
 end

@@ -147,7 +147,7 @@ function sys --description 'System and Drive sync report card as an aligned grid
     set -a cells normal\t'󰅐'\tup\t(_sys_rel (math -s0 $up))
 
     # ---- Drive sync ----
-    set -l state; set -l color; set -l word; set -l next; set -l timer; set -l watch; set -l conflicts; set -l dfailed; set -l skipped; set -l error
+    set -l state; set -l color; set -l word; set -l next; set -l timer; set -l watch; set -l conflicts; set -l dfailed; set -l skipped; set -l error; set -l inhibit
     for kv in (_drive_facts)
         set -l p (string split -m1 = $kv)
         test $p[1] = failed; and set p[1] dfailed
@@ -169,7 +169,7 @@ function sys --description 'System and Drive sync report card as an aligned grid
     set -a cells "$conf_color"\t'󰩌'\tconflicts\t$conflicts
 
     _sys_grid $cells
-    _drive_attention $dfailed $skipped $error
+    _drive_attention $dfailed $skipped $error $inhibit
     test $stale -eq 1; and printf '%s󰗖 sampler stale, run: drive watch%s\n' (set_color red) (set_color normal)
 
     # ---- verbose extras ----

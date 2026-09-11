@@ -1,5 +1,6 @@
 # Drive sync facts as key=value lines, one source for `_drive_line` and the `sys` grid.
-# Reads the last-run summary written by rclone-bisync-gdrive.sh and makes one systemctl call.
+# Reads the last-run summary written by rclone-bisync-gdrive.sh, makes one systemctl call, and asks
+# logind whether the service's suspend inhibitor is held (systemd-inhibit --list, a few ms).
 function _drive_facts
     set -l state ~/.local/state/drive
     set -l now (date +%s)
@@ -48,6 +49,10 @@ function _drive_facts
     end
     test $svc_state = activating; and begin; set color blue; set word syncing; end
 
+    # the service wraps its run in systemd-inhibit --who=rclone-bisync --mode=block
+    set -l inhibit 0
+    systemd-inhibit --list --no-legend --no-pager --mode=block 2>/dev/null | string match -q 'rclone-bisync *'; and set inhibit 1
+
     # the timer fires 30 min after the service last started, whoever started it
     set -l next -
     if test $start -gt 0
@@ -66,4 +71,5 @@ function _drive_facts
     echo "failed=$failed"
     echo "skipped=$skipped"
     echo "error=$error"
+    echo "inhibit=$inhibit"
 end

@@ -35,7 +35,7 @@ The sync script sends desktop notifications itself:
 
 ## Day to day
 
-`sys` prints the report card, also shown at the top of every new terminal: an aligned grid of icon, label and value cells (3 or 4 columns depending on terminal width) covering cpu, ram, swap, temperature, disk, wifi, throughput, tailscale, battery, failed units, pending updates, uptime, and the sync cells: age of the last run, time to the next timer run, watcher state, conflict count. Extra lines appear only for failures, skips or a stale sampler. `sys -v` adds mounts, all sensors, failed unit names and the full `drive status`. Icons are Nerd Font Material Design glyphs; the Font Awesome range does not render in ghostty's bundled font.
+`sys` prints the report card, also shown at the top of every new terminal: an aligned grid of icon, label and value cells (3 or 4 columns depending on terminal width) covering cpu, ram, swap, temperature, disk, wifi, throughput, tailscale, battery, failed units, pending updates, uptime, and the sync cells: age of the last run, time to the next timer run, watcher state, conflict count. Extra lines appear only for failures, skips, a stale sampler, or, in blue, while a running sync holds the suspend inhibitor. `sys -v` adds mounts, all sensors, failed unit names and the full `drive status`. Icons are Nerd Font Material Design glyphs; the Font Awesome range does not render in ghostty's bundled font.
 
 `drive` is the control surface:
 
