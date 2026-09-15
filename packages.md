@@ -113,7 +113,8 @@ cargo-binstall.
 | kubectl | CLI | |
 | docker-ce, compose, buildx | Service | Docker daemon enabled. No images kept |
 | postgresql-server, postgresql, postgresql-contrib | Service | PostgreSQL 18, Fedora. Installed 2026-09-16, `postgresql-setup --initdb`, service enabled. Data in `/var/lib/pgsql/data`, port 5432. Role `bine` is a superuser via peer auth, with a `bine` database so bare `psql` works; localhost TCP uses `scram-sha-256`, so set a password with `\password` in psql before apps connect over TCP |
-| doppler, infisical, tailscale | CLI | Tailscale daemon enabled. Infisical from its own repo (`infisical-cli.repo`), pointed at the self-hosted instance via `INFISICAL_DOMAIN`; see `secrets.md` |
+| doppler, infisical | CLI | Infisical from its own repo (`infisical-cli.repo`), pointed at the self-hosted instance via `INFISICAL_DOMAIN`; see `secrets.md` |
+| tailscale | Service | Daemon enabled. Logged in 2026-09-16 to the hm.hammadmajid@gmail.com tailnet as `fedora` (`tailscale up --operator=bine --ssh --accept-routes`), so `tailscale` works without sudo and Tailscale SSH is on. Re-login after `tailscale logout` needs the same flags |
 | android-tools | CLI | adb, fastboot |
 | xclip, wtype, dos2unix, mtr, nmap-ncat, sysbench, bcc-tools, wireguard-tools, sos | CLI | Utilities |
 | gamemode | Service | No consumer since Steam was removed |
