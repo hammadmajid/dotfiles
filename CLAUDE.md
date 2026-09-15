@@ -38,7 +38,7 @@ A `.git` directory far bigger than `git count-objects -vH` reports as packed is 
 
 ## Files and sync
 
-`~/Code` holds one directory per domain plus `.trash/` and `.archive/` for old copies; no `.env` is tracked in any repo. `~/Downloads` is synced to Google Drive in full, OAuth client JSONs and backup-code files excepted by name, so anything dropped there is on Drive within a minute. Runtime state: `~/.local/state/drive/` (last run, muted skips), `/run/user/1000/sys-sample`, `~/.cache/rclone/bisync/`. Details in `rclone.md`.
+`~/Developer` holds one directory per domain plus `.trash/` and `.archive/` for old copies; no `.env` is tracked in any repo. `~/Downloads` is synced to Google Drive in full, OAuth client JSONs and backup-code files excepted by name, so anything dropped there is on Drive within a minute. Runtime state: `~/.local/state/drive/` (last run, muted skips), `/run/user/1000/sys-sample`, `~/.cache/rclone/bisync/`. Details in `rclone.md`. `~/.hidden` (stow package `nautilus`) keeps `Android`, `dotfiles`, `flutter` and `go` out of GNOME Files and GTK pickers without moving them; `ls` still shows them.
 
 ## Secrets
 
