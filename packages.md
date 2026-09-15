@@ -24,6 +24,7 @@ Type: CLI, TUI, GUI, or Service.
 | Simple Scan | GUI | Fedora | |
 | Orca | GUI | Fedora | Screen reader |
 | PowerShell | CLI | Terra | |
+| IntelliJ IDEA Ultimate | GUI | Copr `medzik/jetbrains` | Bundled JBR in `intellij-idea-ultimate-jbr` |
 
 ### Flatpaks (system installation)
 
@@ -52,7 +53,7 @@ Type: CLI, TUI, GUI, or Service.
 
 ### mise (`mise/.config/mise/config.toml`)
 
-node 24, pnpm, bun, go, rust (via rustup), java 21, bat, direnv, marksman, heroku, wrangler, usage.
+node 24, pnpm, bun, go, rust (via rustup), java 26 (21 still installed, pin per project with `mise use java@21`), tomcat 11.0.25 (Apache does not ship RPMs; `catalina.sh` on PATH), bat, direnv, marksman, heroku, wrangler, usage.
 
 ### AI coding agents (curl-installed)
 
