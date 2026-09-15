@@ -25,6 +25,8 @@ Type: CLI, TUI, GUI, or Service.
 | Orca | GUI | Fedora | Screen reader |
 | PowerShell | CLI | Terra | |
 | IntelliJ IDEA Ultimate | GUI | Copr `medzik/jetbrains` | Bundled JBR in `intellij-idea-ultimate-jbr` |
+| DBeaver CE | GUI | Copr `ok8219/DBeaver` | Repack of the vendor RPM, which has no yum repo of its own. Icon is an absolute path in the launcher, not hicolor |
+| Wireshark | GUI | Fedora | Installed 2026-09-14 with `dnf install wireshark`; pulls `wireshark-cli` (`tshark`). User is not in the `wireshark` group, so capture needs sudo |
 
 ### Flatpaks (system installation)
 
