@@ -37,7 +37,7 @@ alias :q=exit
 alias :wq=exit
 
 #
-alias cdd="cd ~/Code"
+alias cdd="cd ~/Developer"
 alias shx="sudo hx"
 #
 # history grep alias

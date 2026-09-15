@@ -5,12 +5,12 @@ function rm
 
     # Set the path to the monitored directory (Code base directory)
     # `$HOME` expands to the current user's home directory
-    set -l code_dir "$HOME/Code"
+    set -l code_dir "$HOME/Developer"
 
-    # Set the path to the trash directory inside ~/Code
+    # Set the path to the trash directory inside ~/Developer
     set -l trash_dir "$code_dir/.trash"
 
-    # Check if the current directory path starts with "$HOME/Code"
+    # Check if the current directory path starts with "$HOME/Developer"
     # `string match -q "$code_dir*"` tests for a prefix match silently (-q = quiet)
     if string match -q "$code_dir*" "$current_dir"
 
@@ -46,7 +46,7 @@ function rm
         end
 
     else
-        # If not in ~/Code, fall back to regular rm command
+        # If not in ~/Developer, fall back to regular rm command
         # Use `command rm` to explicitly call the real rm and avoid recursion
         command rm $argv
     end
