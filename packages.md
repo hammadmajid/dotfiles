@@ -112,7 +112,7 @@ cargo-binstall.
 | yt-dlp | CLI | Used by the `yt` and `ytm` fish functions |
 | kubectl | CLI | |
 | docker-ce, compose, buildx | Service | Docker daemon enabled. No images kept |
-| postgresql-server, postgresql, postgresql-contrib | Service | PostgreSQL 18, Fedora. Installed 2026-09-16, `postgresql-setup --initdb`, service enabled. Data in `/var/lib/pgsql/data`, port 5432. Role `bine` is a superuser via peer auth (`psql -d postgres`); localhost TCP uses `scram-sha-256`, so set a password with `\password` in psql before apps connect over TCP |
+| postgresql-server, postgresql, postgresql-contrib | Service | PostgreSQL 18, Fedora. Installed 2026-09-16, `postgresql-setup --initdb`, service enabled. Data in `/var/lib/pgsql/data`, port 5432. Role `bine` is a superuser via peer auth, with a `bine` database so bare `psql` works; localhost TCP uses `scram-sha-256`, so set a password with `\password` in psql before apps connect over TCP |
 | doppler, infisical, tailscale | CLI | Tailscale daemon enabled. Infisical from its own repo (`infisical-cli.repo`), pointed at the self-hosted instance via `INFISICAL_DOMAIN`; see `secrets.md` |
 | android-tools | CLI | adb, fastboot |
 | xclip, wtype, dos2unix, mtr, nmap-ncat, sysbench, bcc-tools, wireguard-tools, sos | CLI | Utilities |
