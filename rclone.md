@@ -10,10 +10,10 @@ Selected home folders are kept in two-way sync with same-named top-level folders
 | `~/Pictures` | `gdrive:Pictures` |
 | `~/Videos` | `gdrive:Videos` |
 | `~/Templates` | `gdrive:Templates` |
-| `~/Scratchpad` | `gdrive:Scratchpad` |
+| `~/Desktop` | `gdrive:Desktop` |
 | `~/Downloads` | `gdrive:Downloads` |
 
-All of `~/Downloads` syncs, including its `Archive` subfolder. OAuth client JSONs and backup-code files are excluded by name so a stray download never lands on Drive. `~/Code`, `~/dotfiles`, SDKs, and dot-directories are never touched. There is no per-file size cap. Trash folders, lock files, and partial downloads are excluded via `bisync-filters.txt`.
+All of `~/Downloads` syncs, including its `Archive` subfolder. OAuth client JSONs and backup-code files are excluded by name so a stray download never lands on Drive. `~/Developer`, `~/dotfiles`, SDKs, and dot-directories are never touched. There is no per-file size cap. Trash folders, lock files, and partial downloads are excluded via `bisync-filters.txt`.
 
 The pair list lives in `rclone-bisync-gdrive.sh` and is the single source of truth: the watcher and the `drive` function read it from there. Add or remove a line, then run `drive resync` once and `drive watch` to restart the watcher.
 
@@ -85,7 +85,7 @@ Own OAuth client in project `bine` (ID `bine-42`), Google Auth Platform:
    This opens a browser for Google consent. Expect a "Google hasn't verified this app" warning; continue through it.
 3. Pull everything down, establish the bisync baseline, enable the units:
    ```bash
-   for d in Documents Pictures Videos Templates Scratchpad; do rclone copy gdrive:$d ~/$d -P; done
+   for d in Documents Pictures Videos Templates Desktop; do rclone copy gdrive:$d ~/$d -P; done
    rclone copy gdrive:Downloads ~/Downloads -P
    ~/.config/rclone/rclone-bisync-gdrive.sh --resync
    systemctl --user daemon-reload

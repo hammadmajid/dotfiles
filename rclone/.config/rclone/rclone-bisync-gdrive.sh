@@ -25,7 +25,7 @@ PAIRS=(
     "Pictures=gdrive:Pictures"
     "Videos=gdrive:Videos"
     "Templates=gdrive:Templates"
-    "Scratchpad=gdrive:Scratchpad"
+    "Desktop=gdrive:Desktop"
     "Downloads=gdrive:Downloads"
 )
 
