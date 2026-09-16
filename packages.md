@@ -85,6 +85,12 @@ cargo-binstall.
 - pnpm: language servers for Astro, Tailwind, Bash, Docker, YAML, SQL, Svelte, TypeScript, GitHub Actions, Compose; vscode-langservers-extracted; portless
 - bun: oh-my-posh
 
+### Go (`go install`, lands under mise's go)
+
+| Tool | Type | Notes |
+|---|---|---|
+| cdd | TUI | `github.com/kryft-dev/cdd/cmd/cdd`. Project picker over `~/Developer`; replaces the old `cd ~/Developer` alias. Config `cdd/.config/cdd/config.toml` (stow), history `~/.local/share/cdd/history`, wrapper from `cdd init fish` in `config.fish` |
+
 ### Other curl-installed CLIs
 
 | Tool | Type | Where | Notes |

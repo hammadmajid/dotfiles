@@ -60,6 +60,9 @@ direnv hook fish | source
 #
 # Package: atuin
 atuin init fish | sed "s/-k up/up/g" | source
+#
+# Package cdd
+cdd init fish | source
 
 # Enable transient prompt for starship
 # See: https://starship.rs/advanced-config/#transientprompt-and-transientrightprompt-in-fish
