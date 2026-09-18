@@ -4,4 +4,4 @@ include_hidden = false
 [history]
 max_visits = 1000         # must be >= 1
 [keys]
-vim = true
+vim = false
