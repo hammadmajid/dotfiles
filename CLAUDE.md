@@ -1,9 +1,3 @@
-# Todos first
-
-Todoist is the primary subject of every session; the laptop notes below are secondary. Every reply opens with the pending todos, whatever the question was: run `td today` (overdue and due today) and `td task list --all` at the start of the turn and list what is pending, with project, priority and due date, before the answer. Nothing pending: one line says so. Work in the session that finishes a task is pointed out under that list so the user can close it.
-
-Todoist through `td` (the `todoist-cli` skill is installed). Projects: Inbox, Kryft, University, WowAI. Follow-ups from a session go to Kryft, or WowAI for wowaitech.com work, when the user asks to file them. Broad changes get `--dry-run` first; deletes need the user's explicit yes.
-
 # Managing this laptop
 
 HP EliteBook 820 G3: i5-6300U (4 threads), 12 GiB RAM, 256 GB NVMe as one btrfs partition (`zstd:1`, subvolumes `root` and `home`), Intel HD 520. Fedora 44 Workstation, stock kernel, GNOME 50 on Wayland, fish shell, Ghostty terminal. Owner: Hammad Majid, git author of everything here, working under kryft.dev and wowaitech.com.
@@ -49,6 +43,10 @@ A `.git` directory far bigger than `git count-objects -vH` reports as packed is 
 ## Secrets
 
 `secrets.md` has the map. Never read a secret value: move env files through `$XDG_RUNTIME_DIR` and compare with `envdiff`, which prints keys and hash counts only. `infisical secrets set` masks values by default; `--show-values` stays unused. `rclone.conf` holds an OAuth token and stays out of this repo.
+
+## Tasks
+
+Todoist through `td` (the `todoist-cli` skill is installed). Projects: Inbox, Kryft, University, WowAI. Follow-ups from a session go to Kryft, or WowAI for wowaitech.com work, when the user asks to file them. Broad changes get `--dry-run` first; deletes need the user's explicit yes.
 
 ## Browser
 
