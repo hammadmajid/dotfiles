@@ -51,6 +51,12 @@ Type: CLI, TUI, GUI, or Service.
 |---|---|---|
 | Paper | GUI | Design tool. Pairs with the paper-desktop Claude Code plugin |
 
+### Vendor tarballs in `/opt`
+
+| App | Type | Where | Notes |
+|---|---|---|---|
+| Antigravity | GUI | `/opt/google/antigravity` | Google's agentic editor, v2.15.0, installed 2026-09-19. No RPM, Copr or flatpak exists; vendor ships only a `.tar.gz`. Electron, 510 MB. Hand-written `/usr/share/applications/antigravity.desktop`, `antigravity` wrapper in `/usr/local/bin`, icon pulled out of `resources/app.asar` into hicolor. Self-updates from a vendor endpoint, so dnf will not move it. Distinct from the Antigravity CLI below |
+
 ## Developer tooling
 
 ### mise (`mise/.config/mise/config.toml`)
@@ -62,7 +68,7 @@ node 24, pnpm, bun, go, rust (via rustup), java 26 (21 still installed, pin per 
 | Tool | Type | Where | Notes |
 |---|---|---|---|
 | Claude Code | TUI | `~/.local/share/claude` | Plugins: typescript-lsp, paper-desktop |
-| Antigravity CLI | TUI | `~/.local/bin/agy`, `~/.gemini/antigravity-cli` | 824 MB backend |
+| Antigravity CLI | TUI | `~/.local/bin/agy`, `~/.gemini/antigravity-cli` | 824 MB backend. Separate product from the Antigravity desktop app in `/opt` |
 | herdr | TUI | `~/.local/bin` | Terminal workspace manager for agents |
 
 ### cargo
